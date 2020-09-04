@@ -39,12 +39,16 @@ var getJSONData = function(url){
         return result;
     });
 }
-console.log(true);
-console.log(sessionStorage.getItem('logueado'));
-if (
-!window.location.href.endsWith('login.html') && 
-sessionStorage.getItem('logueado') !== 'true') {
-  window.location.href = 'login.html'
-  }
+
+if ( !(sessionStorage.getItem("logueado"))&&!(window.location.href.endsWith("login.html")) ){
+  window.location = "login.html";}
   document.addEventListener("DOMContentLoaded", function(e){
+});
+
+var Username = document.getElementById('userdata');
+
+let nameuser = JSON.parse(localStorage.getItem('user')).userName;
+console.log(nameuser);
+Username.innerHTML = nameuser
+document.addEventListener("DOMContentLoaded", function(user){
 });

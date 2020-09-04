@@ -9,4 +9,18 @@ function manejadorDeSubmit(evento){
      }
      document.addEventListener("DOMContentLoaded", function(e){
         document.getElementById('formulario-login').addEventListener('submit', manejadorDeSubmit);
-        });
+		});
+        const userName = document.getElementById("userName");
+        
+        document.getElementById('formulario-login').addEventListener("submit", (evento)=> {
+            evento.preventDefault();
+            let userinfo = {
+                userName : userName.value
+            };
+            localStorage.setItem('user', JSON.stringify(userinfo));
+            sessionStorage.setItem("logged",true);
+            location.href = "./index.html";
+            
+        
+            return true;
+        })
