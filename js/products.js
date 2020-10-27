@@ -6,6 +6,8 @@ var currentSortCriteria = undefined;
 var minCost = undefined;
 var maxCost = undefined;
 
+
+//Ordena los productos del mayor precio al menor precio
 function sortCategoriess(criteria, array){
     let result = [];
     if (criteria === ORDENAR_MAYOR)
@@ -15,12 +17,16 @@ function sortCategoriess(criteria, array){
             if ( a.cost < b.cost ){ return 1; }
             return 0;
         });
+
+        //Los ordena del menor precio al mayor
     }else if (criteria === ORDENAR_MENOR){
         result = array.sort(function(a, b) {
             if ( a.cost < b.cost ){ return -1; }
             if ( a.cost > b.cost ){ return 1; }
             return 0;
         });
+
+        //Ordena los productos mostrando los mas vendidos primero
     }else if (criteria === ORDENAR_VENDIDOS){
         result = array.sort(function(a, b) {
             let aVendidos = parseInt(a.soldCount);
@@ -40,12 +46,14 @@ function showProductList(){
     let htmlContentToAppend = "";
     for(let i = 0; i < currentProductsArray.length; i++){
         let product = currentProductsArray[i];
-
+// si ambos son undefined muestro todos los productos
+// O 
+// si ambos tienen un min y max costo distinto a undefined y son valores int muestro los seleccionados
         if (((minCost == undefined) || (minCost != undefined && parseInt(product.cost) >= minCost)) &&
             ((maxCost == undefined) || (maxCost != undefined && parseInt(product.cost) <= maxCost))){
 
             htmlContentToAppend += `
-            <div class="list-group-item list-group-item-action">
+            <a href="product-info.html?product=`+product.name+`" <div class="list-group-item list-group-item-action">
             <div class="row">
                 <div class="col-3">
                     <img src="` + product.imgSrc + `" alt="` + product.description + `" class="img-thumbnail">
@@ -73,7 +81,7 @@ function sortAndShowProducts(sortCriteria, productsArray){
     if(productsArray != undefined){
         currentProductsArray = productsArray;
     }
-
+//Muestra los productos ordenados
     currentProductsArray = sortCategoriess(currentSortCriteria, currentProductsArray);
 
     //Muestro las categorías ordenadas
@@ -113,18 +121,17 @@ document.addEventListener("DOMContentLoaded", function(e){
     });
 
     document.getElementById("rangeFilterCount").addEventListener("click", function(){
-        //Obtengo el mínimo y máximo de los intervalos para filtrar por cantidad
-        //de productos por categoría.
+        //Obtengo el mínimo y máximo de los intervalos para filtrar por valor del producto
         minCost = document.getElementById("rangeFilterCountMin").value;
         maxCost = document.getElementById("rangeFilterCountMax").value;
-
+// Tiene que cumplir con: Un valor que no sea undefined Y un campo no vacio Y un valor int mayor o igual a 0
         if ((minCost != undefined) && (minCost != "") && (parseInt(minCost)) >= 0){
             minCost = parseInt(minCost);
         }
         else{
             minCost = undefined;
         }
-
+// Tiene que cumplir con: Un valor que no sea undefined Y un campo no vacio Y un valor int mayor o igual a 0
         if ((maxCost != undefined) && (maxCost != "") && (parseInt(maxCost)) >= 0){
             maxCost = parseInt(maxCost);
         }

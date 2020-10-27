@@ -1,0 +1,31 @@
+.comentarios{
+ 
+  padding-left: 100px;
+}
+
+.campoComentario{
+  padding-left: 100px;
+
+}
+.titulo{
+  padding-left: 100px;
+
+}
+.dropdown{
+height: 50px;
+}
+.productosRelacionados{
+padding-left: 100px;
+margin-top: 50px;
+}
+.itemCarrito{
+  padding-left: 120px;
+}
+.subtotal{
+  padding-left: 80%; 
+  margin-top: 50px;
+  font-size: 20px;
+}
+.imagenes{
+  width: 150px; height: 150px;
+}
